@@ -1,4 +1,4 @@
-PROGS = printargs echorepeat echorepeat-hdr
+PROGS = printargs echorepeat echorepeat-hdr echorepeat-cfg
 
 % : %.c
 	gcc -g -o $@ $<
