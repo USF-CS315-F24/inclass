@@ -7,15 +7,15 @@ bar_s:
     ret
 
 foo_s:
-    addi sp, sp, -16 
+    addi sp, sp, -16   # Allocate 16 bytes of stack space
+                       # This must be a multiple of 16
+    sd ra, (sp)        # Put ra in the first 64 bit (8 byte) stack slot
 
-    sd ra, (sp)
-
-    call bar_s
+    call bar_s         # ra = pc + 4; pc = bar_s (addr)
     # PC + 4
 
-    addi a0, a0, 1    
+    addi a0, a0, 1     # a0 = bar_s(a0) + 1
 
-    ld ra, (sp)
-    addi sp, sp, 16
-    ret
+    ld ra, (sp)        # Restore ra from stack
+    addi sp, sp, 16    # Deallocate 16 bytes of stack space
+    ret                # pc = ra

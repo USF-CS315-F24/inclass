@@ -1,7 +1,8 @@
-PROGS = arr call
+PROGS = arr call add4f
 ARR_OBJS = arr.o arr_c.o arr_s.o
 CALL_OBJS = call.o call_c.o call_s.o
-OBJS = ${ARR_OBJS} ${CALL_OBJS}
+ADD4F_OBJS = add4f.o add4f_c.o add4f_s.o
+OBJS = ${ARR_OBJS} ${CALL_OBJS} ${ADD4F_OBJS}
 
 %.o: %.s
 	as -g -o $@ $<
@@ -16,8 +17,10 @@ arr: $(ARR_OBJS)
 
 call: $(CALL_OBJS)
 	gcc -g -o $@ $^
-	
 
+add4f: $(ADD4F_OBJS)
+	gcc -g -o $@ $^
+	
 clean:
 	rm -rf ${PROGS} ${OBJS}
 
